@@ -1,7 +1,7 @@
 # TICTACTOE
 
-A basic terminal tic tac toe application, made with go.<br>
-This is a man vs computer game, the A.I was made by using the mini max Algorithm.<br>
+A basic terminal tic tac toe application, made with Go.<br>
+This is a man vs computer version, the A.I was made by using the mini max Algorithm.<br>
 <br>
 <br>
 LinkedIn of creater:<br>
