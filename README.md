@@ -1,4 +1,4 @@
-# TICTACTOE
+# TIC TAC TOE
 
 A basic terminal tic tac toe application, made with Go.<br>
 This is a man vs computer version, the A.I was made by using the mini max Algorithm.<br>
