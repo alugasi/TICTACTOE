@@ -43,7 +43,7 @@ func main() {
 			//computer turn
 			v.PrintComputerTurnMsg()
 			//validate computer turn
-			winner = l.CheckWinning(row, col, isX, 0, vArr)
+			winner = l.CheckWinning(row, col, !isX, 0, vArr)
 			v.PrintBoard(bArr)
 		}
 	}
