@@ -30,30 +30,29 @@ func main() {
 
 	//create AI object
 	var computer l.MiniMax
-
+	//print empty board
+	v.PrintBoard(bArr)
 	//start game
 	for i := 0; i < 9 && winner == 0; {
 		//player turn
 		v.PrintPlayerTurnMsg(playerName)
 		//making player move
-		row, col, playerMoveErr := l.PlayerMove(vArr, isX, bArr)
+		playerMoveErr := l.PlayerMove(vArr, isX, bArr)
 		for playerMoveErr != nil {
 			v.PrintMessage(playerMoveErr.Error())
 			v.PrintPlayerTurnMsg(playerName)
-			row, col, playerMoveErr = l.PlayerMove(vArr, isX, bArr)
+			playerMoveErr = l.PlayerMove(vArr, isX, bArr)
 		}
 		v.PrintBoard(bArr)
 		i++
-		//validate player turn
-		winner = (&computer).Evaluation(row, col, isX, 1, vArr)
+		//evaluating game status
+		winner = (&computer).Evaluation(true, vArr)
 
 		if winner == 0 && i < 9 {
 			//computer turn
 			v.PrintComputerTurnMsg()
-			//making computer move
-			(&computer).AIMove(isX, i, vArr, bArr)
-			//validate computer turn
-			winner = (&computer).Evaluation(row, col, !isX, 0, vArr)
+			//making computer move and evaluating game status
+			winner = (&computer).AIMove(isX, i, vArr, bArr)
 			v.PrintBoard(bArr)
 			i++
 		}

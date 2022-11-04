@@ -40,7 +40,7 @@ if it invalid move than it will return an error, if it valid it will update the 
 
 of the values Array and the matched elements in the game board array
 */
-func PlayerMove(valArr *[3][3]byte, side bool, board *[16][35]byte) (int, int, error) {
+func PlayerMove(valArr *[3][3]byte, side bool, board *[16][35]byte) error {
 	var cell byte
 	var r, c int
 	var err error
@@ -60,5 +60,5 @@ func PlayerMove(valArr *[3][3]byte, side bool, board *[16][35]byte) (int, int, e
 		valArr[r][c] = letter
 		updateVals(letter, r, c, board)
 	}
-	return r, c, err
+	return err
 }
