@@ -11,7 +11,7 @@ func main() {
 	vArr := l.InitValsArray()
 	//init game board
 	bArr := l.InitGameBoard()
-	//asl for player name
+	//ask for player name
 	v.PrintRequestNameMessage()
 	playerName := l.GetPlayerName()
 	var isX bool
