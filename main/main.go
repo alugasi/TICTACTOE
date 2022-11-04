@@ -3,6 +3,7 @@ package main
 import (
 	l "TICTACTOE/logic"
 	v "TICTACTOE/view"
+	"fmt"
 )
 
 func main() {
@@ -65,4 +66,5 @@ func main() {
 	} else {
 		v.PrintMessage("Computer wins!")
 	}
+	fmt.Scanln()
 }
