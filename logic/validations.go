@@ -77,36 +77,3 @@ func getIndexes(index int) (int, int) {
 		return 2, 2
 	}
 }
-
-/*
-Checks if there is a winning situation(i.e an entire row or col or diagonal with the same sign)
-
-If there is than it will return either 1 for player winning or 0 for the computer.
-
-If there still is a tie then it will return -1
-*/
-func CheckWinning(row, col int, isX bool, turn int, valArr *[3][3]byte) int {
-	var signToCheck byte
-	if isX {
-		signToCheck = 'X'
-	} else {
-		signToCheck = 'O'
-	}
-	//row and col check
-	if (valArr[row][0] == signToCheck && valArr[row][1] == signToCheck && valArr[row][2] == signToCheck) ||
-		(valArr[0][col] == signToCheck && valArr[1][col] == signToCheck && valArr[2][col] == signToCheck) {
-		if turn == 1 {
-			return 1
-		}
-		return 0
-	}
-	// diagonals checks
-	if valArr[1][1] == signToCheck && ((valArr[0][0] == signToCheck && valArr[2][2] == signToCheck) ||
-		(valArr[0][2] == signToCheck && valArr[2][0] == signToCheck)) {
-		if turn == 1 {
-			return 1
-		}
-		return 0
-	}
-	return -1
-}

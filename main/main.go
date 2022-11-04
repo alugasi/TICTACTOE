@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	winner := -1 //-1 = no winner, 0 = computer wins, 1 = player wins
+	winner := 0 //0 = no winner, negative = computer wins, positive = player wins
 	vArr := l.InitValsArray()
 	//init game board
 	bArr := l.InitGameBoard()
@@ -26,8 +26,12 @@ func main() {
 	}
 	//announce player side
 	v.PrintSideMessage(isX)
+
+	//create AI object
+	var computer l.MiniMax
+
 	//start game
-	for i := 0; i < 9 && winner == -1; {
+	for i := 0; i < 9 && winner == 0; {
 		//player turn
 		v.PrintPlayerTurnMsg(playerName)
 		//making player move
@@ -40,22 +44,23 @@ func main() {
 		v.PrintBoard(bArr)
 		i++
 		//validate player turn
-		winner = l.CheckWinning(row, col, isX, 1, vArr)
+		winner = (&computer).Evaluation(row, col, isX, 1, vArr)
 
-		if winner == -1 && i < 9 {
+		if winner == 0 && i < 9 {
 			//computer turn
 			v.PrintComputerTurnMsg()
 			//making computer move
+			(&computer).AIMove(isX, i, vArr, bArr)
 			//validate computer turn
-			winner = l.CheckWinning(row, col, !isX, 0, vArr)
+			winner = (&computer).Evaluation(row, col, !isX, 0, vArr)
 			v.PrintBoard(bArr)
 			i++
 		}
 	}
 	//print outcome
-	if winner == -1 {
+	if winner == 0 {
 		v.PrintMessage("Tie!")
-	} else if winner == 1 {
+	} else if winner > 0 {
 		v.PrintMessage("Player wins!")
 	} else {
 		v.PrintMessage("Computer wins!")
