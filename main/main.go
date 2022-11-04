@@ -7,7 +7,8 @@ import (
 
 func main() {
 
-	winner := 0 //0 = no winner, negative = computer wins, positive = player wins
+	//0 = no winner, negative = computer wins, positive = player wins
+	winner := 0
 	vArr := l.InitValsArray()
 	//init game board
 	bArr := l.InitGameBoard()
