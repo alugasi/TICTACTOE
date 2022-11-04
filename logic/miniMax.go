@@ -104,7 +104,7 @@ func (AI *MiniMax) findBestMove(board *[3][3]byte, round int) (r int, c int) {
 		//play move
 		board[m.r][m.c] = AI.compSide
 		//find score of the move
-		val := AI.minimax(AI.board, 1, true, false, round+1)
+		val := AI.minimax(AI.board, 1, true, false, round+1, math.MinInt, math.MaxInt)
 		//undue move
 		board[m.r][m.c] = '.'
 		//if optimal so far
@@ -120,7 +120,7 @@ func (AI *MiniMax) findBestMove(board *[3][3]byte, round int) (r int, c int) {
 /*
 Simulate the outcomes of a given move and return the score of the final game state of the move
 */
-func (AI *MiniMax) minimax(board *[3][3]byte, depth int, isMaximizingPlayer bool, isPlayer bool, round int) int {
+func (AI *MiniMax) minimax(board *[3][3]byte, depth int, isMaximizingPlayer bool, isPlayer bool, round int, alpha, beta int) int {
 
 	//evaluate the game state
 	score := AI.Evaluation(isPlayer, board)
@@ -145,12 +145,20 @@ func (AI *MiniMax) minimax(board *[3][3]byte, depth int, isMaximizingPlayer bool
 				//play move
 				board[m.r][m.c] = AI.playerSide
 				//find the final score of this move
-				value := AI.minimax(board, depth+1, false, true, round+1)
+				value := AI.minimax(board, depth+1, false, true, round+1, alpha, beta)
 				//undue move
 				board[m.r][m.c] = '.'
 				//if optimal so far
 				if value > bestVal {
 					bestVal = value
+				}
+				//maximize alpha
+				if alpha < bestVal {
+					alpha = bestVal
+				}
+				//pruning
+				if beta <= alpha {
+					break
 				}
 			}
 			//return optimal score
@@ -164,12 +172,20 @@ func (AI *MiniMax) minimax(board *[3][3]byte, depth int, isMaximizingPlayer bool
 				//play move
 				board[m.r][m.c] = AI.compSide
 				//find the final score of this move
-				value := AI.minimax(board, depth+1, true, false, round+1)
+				value := AI.minimax(board, depth+1, true, false, round+1, alpha, beta)
 				//undue move
 				board[m.r][m.c] = '.'
 				//if optimal so far
 				if value < bestVal {
 					bestVal = value
+				}
+				//minimize beta
+				if beta > bestVal {
+					beta = bestVal
+				}
+				//pruning
+				if beta <= alpha {
+					break
 				}
 			}
 			//return optimal score
