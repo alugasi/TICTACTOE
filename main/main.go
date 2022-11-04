@@ -27,9 +27,10 @@ func main() {
 	//announce player side
 	v.PrintSideMessage(isX)
 	//start game
-	for i := 0; i < 9 && winner == -1; i++ {
+	for i := 0; i < 9 && winner == -1; {
 		//player turn
 		v.PrintPlayerTurnMsg(playerName)
+		//making player move
 		row, col, playerMoveErr := l.PlayerMove(vArr, isX, bArr)
 		for playerMoveErr != nil {
 			v.PrintMessage(playerMoveErr.Error())
@@ -37,18 +38,22 @@ func main() {
 			row, col, playerMoveErr = l.PlayerMove(vArr, isX, bArr)
 		}
 		v.PrintBoard(bArr)
+		i++
 		//validate player turn
 		winner = l.CheckWinning(row, col, isX, 1, vArr)
-		if winner == -1 {
+
+		if winner == -1 && i < 9 {
 			//computer turn
 			v.PrintComputerTurnMsg()
+			//making computer move
 			//validate computer turn
 			winner = l.CheckWinning(row, col, !isX, 0, vArr)
 			v.PrintBoard(bArr)
+			i++
 		}
 	}
 	//print outcome
-	if winner == 0 {
+	if winner == -1 {
 		v.PrintMessage("Tie!")
 	} else if winner == 1 {
 		v.PrintMessage("Player wins!")
