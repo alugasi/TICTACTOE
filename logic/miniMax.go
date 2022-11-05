@@ -120,7 +120,6 @@ func (AI *MiniMax) findBestMove(board *[3][3]byte, round int) (r int, c int) {
 Simulate the outcomes of a given move and return the score of the final game state of the move
 */
 func (AI *MiniMax) minimax(board *[3][3]byte, depth int, isMaximizingPlayer bool, isPlayer bool, round int, alpha, beta int) int {
-
 	//evaluate the game state
 	score := AI.Evaluation(isPlayer, board)
 	//if player won
