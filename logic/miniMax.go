@@ -27,7 +27,7 @@ type move struct {
 /*
 Init the AI fields after each player turn
 */
-func (AI *MiniMax) construct(isX bool, board *[3][3]byte) {
+func (AI *MiniMax) Construct(isX bool, board *[3][3]byte) {
 	if isX {
 		AI.playerSide = 'X'
 		AI.compSide = 'O'
@@ -45,8 +45,7 @@ and update the relevant cells in the values game array and the game board array.
 
 Return the outcome of the move(-10 computer wins, 10 player wins, 0 tie)
 */
-func (AI *MiniMax) AIMove(isX bool, round int, board *[3][3]byte, screen *[16][35]byte) int {
-	AI.construct(isX, board)
+func (AI *MiniMax) AIMove(round int, board *[3][3]byte, screen *[16][35]byte) int {
 	r, c := AI.findBestMove(AI.board, round)
 	board[r][c] = AI.compSide
 	updateVals(AI.compSide, r, c, screen)

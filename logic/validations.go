@@ -39,6 +39,7 @@ func validateMove(cell byte, valArr *[3][3]byte) (int, int, error) {
 		index := int(cell)
 		index = index - 1
 		r, c := getIndexes(index)
+
 		//cell is taken
 		if valArr[r][c] != '.' {
 			return -1, -1, fmt.Errorf("Cell is already taken!")

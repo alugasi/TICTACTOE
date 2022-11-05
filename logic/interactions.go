@@ -46,8 +46,10 @@ func PlayerMove(valArr *[3][3]byte, side bool, board *[16][35]byte) error {
 	var err error
 	//get cell from player
 	fmt.Scanln(&cell)
+
 	//validate cell
 	r, c, err = validateMove(cell, valArr)
+
 	//update values array and game board array
 	if err == nil {
 

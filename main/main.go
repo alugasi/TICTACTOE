@@ -11,13 +11,16 @@ func main() {
 	//0 = no winner, negative = computer wins, positive = player wins
 	winner := 0
 	vArr := l.InitValsArray()
+
 	//init game board
 	bArr := l.InitGameBoard()
+
 	//ask for player name
 	v.PrintRequestNameMessage()
 	playerName := l.GetPlayerName()
 	var isX bool
 	var getSideError error
+
 	//get side from player
 	v.PrintingStartMessage(playerName)
 	isX, getSideError = l.GetSide()
@@ -26,17 +29,23 @@ func main() {
 		v.PrintingStartMessage(playerName)
 		isX, getSideError = l.GetSide()
 	}
+
 	//announce player side
 	v.PrintSideMessage(isX)
 
-	//create AI object
+	//create AI object and initialize it
 	var computer l.MiniMax
+	computer.Construct(isX, vArr)
+
 	//print empty board
 	v.PrintBoard(bArr)
+
 	//start game
 	for i := 0; i < 9 && winner == 0; {
+
 		//player turn
 		v.PrintPlayerTurnMsg(playerName)
+
 		//making player move
 		playerMoveErr := l.PlayerMove(vArr, isX, bArr)
 		for playerMoveErr != nil {
@@ -46,18 +55,22 @@ func main() {
 		}
 		v.PrintBoard(bArr)
 		i++
+
 		//evaluating game status
 		winner = (&computer).Evaluation(true, vArr)
 
 		if winner == 0 && i < 9 {
+
 			//computer turn
 			v.PrintComputerTurnMsg()
+
 			//making computer move and evaluating game status
-			winner = (&computer).AIMove(isX, i, vArr, bArr)
+			winner = (&computer).AIMove(i, vArr, bArr)
 			v.PrintBoard(bArr)
 			i++
 		}
 	}
+
 	//print outcome
 	if winner == 0 {
 		v.PrintMessage("Tie!")

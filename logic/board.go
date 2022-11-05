@@ -44,6 +44,7 @@ parameters: val(byte) = the value that was inserted in the board(X/O)
 func updateVals(val byte, row, col int, board *[16][35]byte) {
 	switch val {
 	case 'O':
+
 		//update cells if O was inserted
 		board[1+5*row][5+11*col] = '*'
 		board[1+5*row][7+11*col] = '*'
@@ -57,6 +58,7 @@ func updateVals(val byte, row, col int, board *[16][35]byte) {
 		board[4+5*row][5+11*col] = '*'
 		board[4+5*row][7+11*col] = '*'
 	case 'X':
+
 		//update cells if X was inserted
 		board[1+5*row][3+12*col] = '*'
 		board[1+5*row][4+12*col] = '*'
