@@ -1,9 +1,10 @@
 package main
 
 import (
-	l "TICTACTOE/logic"
-	v "TICTACTOE/view"
 	"fmt"
+
+	l "github.com/alugasi/TICTACTOE/logic"
+	v "github.com/alugasi/TICTACTOE/view"
 )
 
 func main() {
