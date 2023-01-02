@@ -6,6 +6,7 @@ WORKDIR /app
 # Download Go modules
 COPY go.mod .
 RUN go mod download
+RUN go get github.com/alugasi/TICTACTOE/
 
 # Copy source code
 
