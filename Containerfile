@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine
+FROM golang:1.18-alpine
 
 # Set destination for COPY
 WORKDIR /app
@@ -10,8 +10,8 @@ RUN go mod download
 # Copy source code
 
 COPY main.go  ./
-COPY logic ./
-COPY view ./
+COPY logic/ logic/
+COPY view/ view/
 
 # build
 RUN go build -o /tictactoe
